@@ -1,5 +1,5 @@
 ---
-- name: Create Logstash configuration files (Logstash-Shipper)
+- name: Create Logstash configuration file.
   template:
     src: "{{ item }}.j2"
     dest: "/etc/logstash/conf.d/{{ item }}"
@@ -7,59 +7,5 @@
     group: root
     mode: 0644
   with_items:
-    - shipper.conf
-  notify: restart logstash
-  when: is_shipper
-
-- name: Create Logstash configuration files. (Logstash-Indexer-T1)
-  template:
-    src: "{{ item }}.j2"
-    dest: "/etc/logstash/conf.d/{{ item }}"
-    owner: root
-    group: root
-    mode: 0644
-  with_items:
-    - t1.conf
-  notify: restart logstash
-  when: is_tier1
-
-- name: Create Logstash configuration files. (Logstash-Indexer-T2)
-  template:
-    src: "{{ item }}.j2"
-    dest: "/etc/logstash/conf.d/{{ item }}"
-    owner: root
-    group: root
-    mode: 0644
-  with_items:
-    - shipper.conf
-  notify: restart logstash
-  when: is_tier2
-
-- name: Create Logstash configuration files. (Logstash-Indexer-T3)
-  template:
-    src: "{{ item }}.j2"
-    dest: "/etc/logstash/conf.d/{{ item }}"
-    owner: root
-    group: root
-    mode: 0644
-  with_items:
-    - shipper.conf
-  notify: restart logstash
-  when: is_tier3
-
-- name: Create Logstash configuration file for local syslog.
-  template:
-    src: 02-local-syslog-input.conf.j2
-    dest: /etc/logstash/conf.d/02-local-syslog-input.conf
-    owner: root
-    group: root
-    mode: 0644
-  when: logstash_monitor_local_syslog
-  notify: restart logstash
-
-- name: Ensure configuration for local syslog is absent if disabled.
-  file:
-    path: /etc/logstash/conf.d/02-local-syslog-input.conf
-    state: absent
-  when: not logstash_monitor_local_syslog
+    - logstash.conf
   notify: restart logstash

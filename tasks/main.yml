@@ -1,8 +1,7 @@
 ---
-- name: Install Logstash
-
 - include: setup.yml
 - include: config.yml
+- include: filters.yml
 - include: ssl.yml
 - include: plugins.yml
 

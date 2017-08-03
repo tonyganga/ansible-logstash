@@ -1,0 +1,15 @@
+---
+- name: Create Logstash filters.
+  copy:
+    src: "filters/{{ item }}"
+    dest: "/etc/logstash/conf.d/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - 01-syslog.conf
+    - 02-nginx.conf
+    - 03-apache.conf
+    - 04-beats.conf
+  notify: restart logstash
+  when: "'logstash-grok-ready' in group_names"

@@ -1,0 +1,68 @@
+---
+dependency:
+  name: galaxy
+  requirements_file: ./tests/requirements.yml
+  options:
+      ignore-certs: True
+      ignore-errors: True
+driver:
+  name: docker
+ansible:
+  verbose: false
+  playbook: ./tests/test.yml
+docker:
+  containers:
+    - name: centos-7-logstash-shipper
+      hostname: centos-7-logstash-shipper
+      image: booleanismaybe/docker-centos7
+      image_version: latest
+      ansible_groups:
+        - logstash-shipper
+      privileged: True
+      cap_add:
+        - SYS_ADMIN
+      volume:
+        - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+      command: "/usr/sbin/init"
+      port_bindings:
+        5044: 5044
+    - name: centos-7-logstash-raw-log
+      hostname: centos-7-logstash-raw-log
+      image: booleanismaybe/docker-centos7
+      image_version: latest
+      ansible_groups:
+        - logstash-raw-log
+      privileged: True
+      cap_add:
+        - SYS_ADMIN
+      volume:
+        - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+      command: "/usr/sbin/init"
+    - name: centos-7-logstash-grok-ready
+      hostname: centos-7-logstash-grok-ready
+      image: booleanismaybe/docker-centos7
+      image_version: latest
+      ansible_groups:
+        - logstash-grok-ready
+      privileged: True
+      cap_add:
+        - SYS_ADMIN
+      volume:
+        - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+      command: "/usr/sbin/init"
+    - name: centos-7-logstash-grok-complete
+      hostname: centos-7-logstash-grok-complete
+      image: booleanismaybe/docker-centos7
+      image_version: latest
+      ansible_groups:
+        - logstash-grok-complete
+      privileged: True
+      cap_add:
+        - SYS_ADMIN
+      volume:
+        - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+      command: "/usr/sbin/init"
+verifier:
+  name: testinfra
+  options:
+    v: ""

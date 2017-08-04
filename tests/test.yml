@@ -1,0 +1,8 @@
+---
+- hosts: all
+  roles:
+    - geerlingguy.java
+    - geerlingguy.repo-epel
+    - logstash
+  vars:
+    java_packages: java-1.7.0-openjdk

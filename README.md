@@ -58,6 +58,31 @@ rabbitmq_ack: true
 rabbitmq_prefetch_count: 50
 ```
 
+Listeners
+---------
+
+```yaml
+---
+- name: start logstash service
+  systemd:
+    name: logstash
+    state: started
+    enabled: "{{ logstash_enabled_on_boot }}"
+  listen: start logstash
+
+- name: stop logstash service
+  systemd:
+    name: logstash
+    state: stopped
+  listen: stop logstash
+
+- name: restart logstash service
+  systemd:
+    name: logstash
+    state: restarted
+  listen: restart logstash
+```
+
 Example Playbook
 ----------------
 

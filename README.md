@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/tonyganga/ansible-logstash.svg?branch=master)](https://travis-ci.org/tonyganga/ansible-logstash)
-
 Logstash 5.x
 =========
+
+[![Build Status](https://travis-ci.org/tonyganga/ansible-logstash.svg?branch=master)](https://travis-ci.org/tonyganga/ansible-logstash)
 
 This role will install and configure Logstash 5.x tailored to consumer/produce to RabbitMQ.
 
@@ -12,6 +12,7 @@ This role has been tested on CentOS 7.
 
 Requirements
 ------------
+
 The role has been tested with the following on Mac and Linux.
 
 * [Docker](https://www.docker.com/) >= 17.06.0-ce
@@ -27,7 +28,7 @@ Dependencies
 Role Variables
 --------------
 
-```
+```yaml
 ---
 logstash_listen_port_beats: 5044
 
@@ -60,7 +61,7 @@ rabbitmq_prefetch_count: 50
 Example Playbook
 ----------------
 
-```
+```yaml
 - hosts: all
   roles:
     - geerlingguy.java
@@ -73,8 +74,9 @@ Example Playbook
 
 Tests
 -----
+
 Use molecule to run tests.
 
-```
-$ molecule test
+```bash
+molecule test
 ```

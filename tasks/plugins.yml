@@ -3,8 +3,6 @@
   command: bin/logstash-plugin list
     chdir=/usr/share/logstash
   register: logstash_plugins_list
-  environment:
-    JAVA_HOME: /usr/lib/jvm/jre-1.7.0-openjdk
   changed_when: false
 
 - name: Install configured plugins.

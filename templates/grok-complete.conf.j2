@@ -1,0 +1,23 @@
+input {
+  rabbitmq {
+    host => "{{ rabbitmq_hostname }}"
+    exchange => "t3-grok-complete"
+    user => "{{ rabbitmq_username }}"
+    password => "{{ rabbitmq_password }}"
+    vhost => "{{ rabbitmq_vhost }}"
+    queue => "t3-grok-complete"
+    tags  => [ "t3-grok-complete" ]
+    durable => true
+    ack => true
+    threads => 1
+    prefetch_count => 50
+    port => 5672
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => "http://elasticsearch.wdaws.com"
+    index => "[type]-%{+YYYY.MM.dd}"
+  }
+}

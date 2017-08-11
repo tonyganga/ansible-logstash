@@ -1,0 +1,30 @@
+input {
+  rabbitmq {
+    host => "{{ rabbitmq_hostname }}"
+    exchange => "t1-raw-log"
+    user => "{{ rabbitmq_username }}"
+    password => "{{ rabbitmq_password }}"
+    vhost => "{{ rabbitmq_vhost }}"
+    queue => "t1-raw-log"
+    tags  => [ "t1-raw-log" ]
+    durable => true
+    ack => true
+    threads => 1
+    prefetch_count => 50
+    port => 5672
+  }
+}
+
+output {
+  rabbitmq {
+       host => "{{ rabbitmq_hostname }}"
+       exchange => "t2-grok-ready"
+       exchange_type => "direct"
+       user => "{{ rabbitmq_username }}"
+       password => "{{ rabbitmq_password }}"
+       vhost => "{{ rabbitmq_vhost }}"
+       workers => 1
+       durable => true
+       persistent => true
+  }
+}

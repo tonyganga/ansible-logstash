@@ -7,5 +7,42 @@
     group: root
     mode: 0644
   with_items:
-    - logstash.conf
+    - shipper.conf
+  when: is_shipper
+  notify: restart logstash
+
+- name: Create Logstash configuration file.
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/logstash/conf.d/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - raw-log.conf
+  when: is_raw_log
+  notify: restart logstash
+
+- name: Create Logstash configuration file.
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/logstash/conf.d/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - grok-ready.conf
+  when: is_grok_ready
+  notify: restart logstash
+
+- name: Create Logstash configuration file.
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/logstash/conf.d/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - grok-complete.conf
+  when: is_grok_complete
   notify: restart logstash

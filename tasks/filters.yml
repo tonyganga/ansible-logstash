@@ -12,4 +12,4 @@
     - 03-apache.conf
     - 04-beats.conf
   notify: restart logstash
-  when: "'logstash-grok-ready' in group_names"
+  when: is_grok_ready

@@ -16,9 +16,10 @@ logstash_install_plugins:
   - logstash-output-rabbitmq
   - logstash-output-elasticsearch
 
+
 rabbitmq_hostname: rmq.domain.com
 rabbitmq_username: logstash
-rabbitmq_password: password
+rabbitmq_password: sekret
 rabbitmq_vhost: logstash
 rabbitmq_port: 5672
 rabbitmq_ack: true
@@ -27,4 +28,4 @@ rabbitmq_prefetch_count: 50
 is_shipper: false
 is_raw_log: false
 is_grok_ready: false
-is_grok_complete: false
+is_grok_complete: true

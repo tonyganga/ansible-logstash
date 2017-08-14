@@ -3,7 +3,7 @@ Logstash 5.x
 
 [![Build Status](https://travis-ci.org/tonyganga/ansible-logstash.svg?branch=master)](https://travis-ci.org/tonyganga/ansible-logstash)
 
-This role will install and configure Logstash 5.x tailored to consumer/produce to RabbitMQ.
+This role will install and configure Logstash 5.x tailored to consume/produce to RabbitMQ.
 
 Supported Platforms
 -------------------
@@ -89,12 +89,7 @@ Example Playbook
 ```yaml
 - hosts: all
   roles:
-    - geerlingguy.java
-    - geerlingguy.repo-epel
     - ansible-logstash
-  vars:
-    java_packages: java-1.7.0-openjdk
-
 ```
 
 Tests
